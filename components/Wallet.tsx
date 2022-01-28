@@ -37,7 +37,7 @@ export const Wallet: FC = ({ children }) => {
 
 
   return (
-    <ConnectionProvider endpoint={clusterApiUrl(WalletAdapterNetwork.Devnet)}>
+    <ConnectionProvider endpoint={clusterApiUrl(WalletAdapterNetwork.Mainnet)}>
       <WalletProvider wallets={wallets} autoConnect>
         {children}
       </WalletProvider>
