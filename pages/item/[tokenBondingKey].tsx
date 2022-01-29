@@ -5,7 +5,7 @@ import NodeWallet from "@project-serum/anchor/dist/cjs/nodewallet";
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import { usePublicKey } from "@strata-foundation/react";
 import { SplTokenBonding } from "@strata-foundation/spl-token-bonding";
-import { getImageFromMeta, SplTokenMetadata } from "@strata-foundation/spl-utils";
+import { SplTokenMetadata } from "@strata-foundation/spl-utils";
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from 'next/router';
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       name: metadataAcc?.data.name,
       description: metadata?.description,
-      image: getImageFromMeta(metadata),
+      image: await SplTokenMetadata.getImage(metadataAcc?.data.uri),
     }
   }
 }
