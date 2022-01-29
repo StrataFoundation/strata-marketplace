@@ -27,7 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const metadataAcc = (await tokenMetadataSdk.getMetadata(await Metadata.getPDA(tokenBondingAcct.targetMint)))!
   const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc.data.uri);
 
-
   return {
     props: {
       name: metadataAcc.data.name,
