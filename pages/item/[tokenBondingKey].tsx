@@ -22,7 +22,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!tokenBondingAcct) {
     console.log("Not found", context.params?.tokenBondingKey);
     return {
-      notFound: true
+      notFound: true,
+      props: {
+        name: "",
+        description: "",
+        image: ""
+      }
     }
   }
   const tokenMetadataSdk = await SplTokenMetadata.init(provider);
@@ -30,7 +35,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc?.data.uri);
 
   return {
-    notFound: false,
     props: {
       name: metadataAcc?.data.name,
       description: metadata?.description,
@@ -40,11 +44,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 
-export const MarketDisplay: NextPage = ({ err, name, image, description }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+export const MarketDisplay: NextPage = ({ name, image, description }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
   const { tokenBondingKey: tokenBondingKeyRaw } = router.query;
   const tokenBondingKey = usePublicKey(tokenBondingKeyRaw as string);
-  console.error(err);
 
   return <Box h="100vh">
     <Head>
