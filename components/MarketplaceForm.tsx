@@ -152,6 +152,10 @@ async function createMarket(tokenBondingSdk: SplTokenBonding, tokenMetadataSdk: 
   return tokenBonding; 
 }
 
+const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+
 export const MarketplaceFrom: React.FC = () => {
   const { 
     register,
@@ -207,6 +211,7 @@ export const MarketplaceFrom: React.FC = () => {
 
   const onSubmit = async (values: IMarketplaceFormProps) => {
     const tokenBondingKey = await createMarket(tokenBondingSdk!, tokenMetadataSdk!, values)
+    await sleep(10 * 1000) // Wait for item to exist on chain, just to be safe so no 404s
     router.push("/item/" + tokenBondingKey.toBase58())
   }
 
