@@ -10,8 +10,8 @@ import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import React from "react";
-import { MarketplaceItem } from "../components/MarketplaceItem";
-import { DEFAULT_ENDPOINT } from "../components/Wallet";
+import { MarketplaceItem } from "@/components/MarketplaceItem";
+import { DEFAULT_ENDPOINT } from "@/components/Wallet";
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
