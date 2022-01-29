@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import { useRouter } from 'next/router'
-import { Spinner, useBondingPricing, usePublicKey, useStrataSdks, useTokenBonding, useTokenMetadata, Notification, useProvider, useMint } from "@strata-foundation/react";
-import { FormLabel, Input, Text, Box, Image, Heading, Container, VStack, FormHelperText, Button, Alert, Center } from "@chakra-ui/react";
-import { SplTokenBonding } from "@strata-foundation/spl-token-bonding";
-import { useAsyncCallback } from "react-async-hook";
-import { PublicKey, Connection, Keypair } from "@solana/web3.js";
-import toast from "react-hot-toast";
-import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
-import BN from "bn.js";
-import { DEFAULT_ENDPOINT } from "../components/Wallet";
-import { Provider } from "@project-serum/anchor";
-import { SplTokenMetadata, getImageFromMeta } from "@strata-foundation/spl-utils";
-import NodeWallet from "@project-serum/anchor/dist/cjs/nodewallet";
+import { Box, Center } from "@chakra-ui/react";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import { Provider } from "@project-serum/anchor";
+import NodeWallet from "@project-serum/anchor/dist/cjs/nodewallet";
+import { Connection, Keypair, PublicKey } from "@solana/web3.js";
+import { usePublicKey } from "@strata-foundation/react";
+import { SplTokenBonding } from "@strata-foundation/spl-token-bonding";
+import { getImageFromMeta, SplTokenMetadata } from "@strata-foundation/spl-utils";
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
-import styles from '../styles/Home.module.css';
+import { useRouter } from 'next/router';
+import React from "react";
 import { MarketplaceItem } from "../components/MarketplaceItem";
+import { DEFAULT_ENDPOINT } from "../components/Wallet";
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
+  global.localStorage = new LocalStorage('./scratch');
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
