@@ -13,52 +13,28 @@ import React from "react";
 import { MarketplaceItem } from "@/components/MarketplaceItem";
 import { DEFAULT_ENDPOINT } from "@/components/Wallet";
 
-let localStorageErr: any | null = null;
-try {
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    global.localStorage = new LocalStorage('./scratch');
-  }
-} catch (err: any) {
-  localStorageErr = err;
-  // do nothing
-}
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    if (localStorageErr) {
-      console.error(localStorageErr)
-    }
-    console.log("Fetching metadata...");
-    const connection = new Connection(DEFAULT_ENDPOINT);
-    const provider = new Provider(connection, new NodeWallet(Keypair.generate()), {})
-    const tokenBondingSdk = await SplTokenBonding.init(provider);
-    const tokenBondingAcct = (await tokenBondingSdk.getTokenBonding(new PublicKey(context.params?.tokenBondingKey as string)));
-    if (!tokenBondingAcct) {
-      console.log("Not found", context.params?.tokenBondingKey);
-      return {
-        notFound: true
-      }
-    }
-    const tokenMetadataSdk = await SplTokenMetadata.init(provider);
-    const metadataAcc = (await tokenMetadataSdk.getMetadata(await Metadata.getPDA(tokenBondingAcct.targetMint)));
-    const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc?.data.uri);
-  
+  const connection = new Connection(DEFAULT_ENDPOINT);
+  const provider = new Provider(connection, new NodeWallet(Keypair.generate()), {})
+  const tokenBondingSdk = await SplTokenBonding.init(provider);
+  const tokenBondingAcct = (await tokenBondingSdk.getTokenBonding(new PublicKey(context.params?.tokenBondingKey as string)));
+  if (!tokenBondingAcct) {
+    console.log("Not found", context.params?.tokenBondingKey);
     return {
-      notFound: false,
-      props: {
-        name: metadataAcc?.data.name,
-        description: metadata?.description,
-        image: getImageFromMeta(metadata),
-      }
+      notFound: true
     }
-  } catch (err) {
-    console.error(err);
-    return {
-      props: {
-        err
-      }
+  }
+  const tokenMetadataSdk = await SplTokenMetadata.init(provider);
+  const metadataAcc = (await tokenMetadataSdk.getMetadata(await Metadata.getPDA(tokenBondingAcct.targetMint)));
+  const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc?.data.uri);
+
+  return {
+    notFound: false,
+    props: {
+      name: metadataAcc?.data.name,
+      description: metadata?.description,
+      image: getImageFromMeta(metadata),
     }
   }
 }
