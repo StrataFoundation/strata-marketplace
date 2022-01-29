@@ -19,36 +19,46 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log("Fetching metadata...");
-  const connection = new Connection(DEFAULT_ENDPOINT);
-  const provider = new Provider(connection, new NodeWallet(Keypair.generate()), {})
-  const tokenBondingSdk = await SplTokenBonding.init(provider);
-  const tokenBondingAcct = (await tokenBondingSdk.getTokenBonding(new PublicKey(context.params?.tokenBondingKey as string)));
-  if (!tokenBondingAcct) {
-    console.log("Not found", context.params?.tokenBondingKey);
-    return {
-      notFound: true
+  try {
+    console.log("Fetching metadata...");
+    const connection = new Connection(DEFAULT_ENDPOINT);
+    const provider = new Provider(connection, new NodeWallet(Keypair.generate()), {})
+    const tokenBondingSdk = await SplTokenBonding.init(provider);
+    const tokenBondingAcct = (await tokenBondingSdk.getTokenBonding(new PublicKey(context.params?.tokenBondingKey as string)));
+    if (!tokenBondingAcct) {
+      console.log("Not found", context.params?.tokenBondingKey);
+      return {
+        notFound: true
+      }
     }
-  }
-  const tokenMetadataSdk = await SplTokenMetadata.init(provider);
-  const metadataAcc = (await tokenMetadataSdk.getMetadata(await Metadata.getPDA(tokenBondingAcct.targetMint)));
-  const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc?.data.uri);
-
-  return {
-    notFound: false,
-    props: {
-      name: metadataAcc?.data.name,
-      description: metadata?.description,
-      image: getImageFromMeta(metadata),
+    const tokenMetadataSdk = await SplTokenMetadata.init(provider);
+    const metadataAcc = (await tokenMetadataSdk.getMetadata(await Metadata.getPDA(tokenBondingAcct.targetMint)));
+    const metadata = await SplTokenMetadata.getArweaveMetadata(metadataAcc?.data.uri);
+  
+    return {
+      notFound: false,
+      props: {
+        name: metadataAcc?.data.name,
+        description: metadata?.description,
+        image: getImageFromMeta(metadata),
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    return {
+      props: {
+        err
+      }
     }
   }
 }
 
 
-export const MarketDisplay: NextPage = ({ name, image, description }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+export const MarketDisplay: NextPage = ({ err, name, image, description }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
   const { tokenBondingKey: tokenBondingKeyRaw } = router.query;
   const tokenBondingKey = usePublicKey(tokenBondingKeyRaw as string);
+  console.error(err);
 
   return <Box h="100vh">
     <Head>
