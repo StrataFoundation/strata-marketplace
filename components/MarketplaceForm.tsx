@@ -207,7 +207,7 @@ export const MarketplaceFrom: React.FC = () => {
 
   const onSubmit = async (values: IMarketplaceFormProps) => {
     const tokenBondingKey = await createMarket(tokenBondingSdk!, tokenMetadataSdk!, values)
-    router.push("/" + tokenBondingKey.toBase58())
+    router.push("/item/" + tokenBondingKey.toBase58())
   }
 
 
