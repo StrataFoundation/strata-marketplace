@@ -51,7 +51,7 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
   >
     <Image w="full" src={image} />
     <Heading>{name}</Heading>
-    <Text>{description}</Text>
+    <Text whiteSpace="pre-line">{description}</Text>
     <div id="price">
       <Input
         placeholder="Quantity"
