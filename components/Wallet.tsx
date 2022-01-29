@@ -1,7 +1,6 @@
-import React, { FC, useMemo } from "react";
 import {
   ConnectionProvider,
-  WalletProvider,
+  WalletProvider
 } from "@solana/wallet-adapter-react";
 import {
   LedgerWalletAdapter,
@@ -10,12 +9,11 @@ import {
   SolflareWalletAdapter,
   SolletExtensionWalletAdapter,
   SolletWalletAdapter,
-  TorusWalletAdapter,
+  TorusWalletAdapter
 } from "@solana/wallet-adapter-wallets";
-import { clusterApiUrl } from "@solana/web3.js";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import React, { FC, useMemo } from "react";
 
-export const DEFAULT_ENDPOINT = clusterApiUrl(WalletAdapterNetwork.Mainnet);
+export const DEFAULT_ENDPOINT = "https://wumbo.genesysgo.net"
 
 // Default styles that can be overridden by your app
 require("@solana/wallet-adapter-react-ui/styles.css");
