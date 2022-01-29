@@ -152,8 +152,6 @@ async function createMarket(tokenBondingSdk: SplTokenBonding, tokenMetadataSdk: 
   return tokenBonding; 
 }
 
-// 52zZyG7GTSMwWWr5Qpby3s2qkaB36PNwNmeDqDHoo7Wz
-
 export const MarketplaceFrom: React.FC = () => {
   const { 
     register,
