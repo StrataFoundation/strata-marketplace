@@ -13,13 +13,23 @@ import React from "react";
 import { MarketplaceItem } from "@/components/MarketplaceItem";
 import { DEFAULT_ENDPOINT } from "@/components/Wallet";
 
-if (typeof localStorage === "undefined" || localStorage === null) {
-  var LocalStorage = require('node-localstorage').LocalStorage;
-  global.localStorage = new LocalStorage('./scratch');
+let localStorageErr: any | null = null;
+try {
+  if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    global.localStorage = new LocalStorage('./scratch');
+  }
+} catch (err: any) {
+  localStorageErr = err;
+  // do nothing
 }
+
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
+    if (localStorageErr) {
+      console.error(localStorageErr)
+    }
     console.log("Fetching metadata...");
     const connection = new Connection(DEFAULT_ENDPOINT);
     const provider = new Provider(connection, new NodeWallet(Keypair.generate()), {})
