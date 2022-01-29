@@ -134,6 +134,7 @@ async function createMarket(tokenBondingSdk: SplTokenBonding, tokenMetadataSdk: 
   const { output: { tokenBonding }, instructions: tokenBondingInstructions, signers: tokenBondingSigners } = await tokenBondingSdk.createTokenBondingInstructions({
     curve,
     targetMint,
+    baseStorage,
     mintCap: new BN(values.quantity),
     buyBaseRoyaltyPercentage: 0,
     sellBaseRoyaltyPercentage: 0,
@@ -141,7 +142,6 @@ async function createMarket(tokenBondingSdk: SplTokenBonding, tokenMetadataSdk: 
     buyTargetRoyaltyPercentage: 0,
     baseMint: mint
   })
-
 
   await tokenBondingSdk.executeBig(Promise.resolve({
     instructions: [instructions, tokenBondingInstructions],
