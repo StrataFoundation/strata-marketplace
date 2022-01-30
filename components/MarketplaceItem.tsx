@@ -44,7 +44,6 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
   image = targetImage || image;
   description = targetData?.description || description;
 
-
   return <VStack
     p={4}
     align="start"

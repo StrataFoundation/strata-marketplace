@@ -1543,10 +1543,10 @@
     superstruct "^0.14.2"
     tweetnacl "^1.0.0"
 
-"@strata-foundation/react@2.2.1-alpha.8+2df342d":
-  version "2.2.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/react/-/react-2.2.1-alpha.8.tgz#fa36fa15824d3597a5380c7999578bf08a269ed2"
-  integrity sha512-TsJbjv2jBFAbtz/+yzHegpJSqBcZJabG8anBrzlMHU34efM9S7S4r9Pk4J38LvtsjKcEo/M872F1hRhcDeCDdw==
+"@strata-foundation/react@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/react/-/react-3.1.0.tgz#03fa750f10f1edf72b3567133f47c8eefe544d82"
+  integrity sha512-Hwy2whf9DGfW/t8099h3ICM7F49w8XXpQVTU+13CA485IGvkeJ+4fe58cfHpf2RqqYq3yuklQqtuf5wMMQbmHQ==
   dependencies:
     "@chakra-ui/react" "^1.7.2"
     "@emotion/react" "^11.6.0"
@@ -1559,9 +1559,9 @@
     "@solana/wallet-adapter-react" "^0.15.1"
     "@solana/wallet-adapter-wallets" "^0.14.0"
     "@solana/web3.js" "^1.32.0"
-    "@strata-foundation/spl-token-bonding" "^2.2.1-alpha.8+2df342d"
-    "@strata-foundation/spl-token-collective" "^2.2.1-alpha.8+2df342d"
-    "@strata-foundation/spl-utils" "^2.2.1-alpha.8+2df342d"
+    "@strata-foundation/spl-token-bonding" "^3.1.0"
+    "@strata-foundation/spl-token-collective" "^3.1.0"
+    "@strata-foundation/spl-utils" "^3.1.0"
     "@toruslabs/solana-embed" "0.0.9"
     axios "^0.25.0"
     buffer "^6.0.3"
@@ -1575,45 +1575,45 @@
     react-icons "^4.3.1"
     yup "^0.32.11"
 
-"@strata-foundation/spl-token-bonding@^2.2.1-alpha.8+2df342d":
-  version "2.2.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-bonding/-/spl-token-bonding-2.2.1-alpha.8.tgz#5c4d57ec91feffd7c2d2fbbc69ec469b78f3ece5"
-  integrity sha512-c0p2+SzT2Kytc/W2qzxS8jHQoFcxob1MQ4ppmYFwdiYT5dp0cIOMzMQp3+q+HPymvG2jAbAO4lfBCYMJ3qjqBA==
+"@strata-foundation/spl-token-bonding@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-bonding/-/spl-token-bonding-3.1.0.tgz#6e31f13e09f041f8cb9f397f9ee89a902c2eb715"
+  integrity sha512-kouUbJkNVzEgyehdwgbQ6LfinAqlZKflo6seOCOlUvTivLPD5/fMpbnS9FqTC+m5Z+YX5C33p9Zh2+LL0kKhqA==
   dependencies:
     "@project-serum/anchor" "^0.20.1"
     "@solana/web3.js" "^1.32.0"
-    "@strata-foundation/spl-utils" "^2.2.1-alpha.8+2df342d"
+    "@strata-foundation/spl-utils" "^3.1.0"
     bn.js "^5.2.0"
     copyfiles "^2.4.1"
 
-"@strata-foundation/spl-token-collective@^2.2.1-alpha.8+2df342d":
-  version "2.2.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-collective/-/spl-token-collective-2.2.1-alpha.8.tgz#f79a97b98450ae92abe2f122a58cfcdfe6669041"
-  integrity sha512-e0+2Mpvr9fG/3Rle6A75Teh7Puu58CLqRfgNCRKpcFazXRY5WXrFcF5IZJ29oShJ/P+S2ehJ5KMwqjgqkEWdww==
+"@strata-foundation/spl-token-collective@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-collective/-/spl-token-collective-3.1.0.tgz#70fc5b4ef7ccea71a61b42dcceb1e8918dff1738"
+  integrity sha512-T6QUxslATu43v4eoNUsQ5sqQfStBEHKcLVe/iup0quRcMtRDDr2fjhyIcA7WzJW6XJhND/gzSteNc/VNLl+hxQ==
   dependencies:
     "@bonfida/spl-name-service" "^0.1.22"
     "@project-serum/anchor" "^0.20.1"
     "@solana/web3.js" "^1.32.0"
-    "@strata-foundation/spl-token-bonding" "^2.2.1-alpha.8+2df342d"
-    "@strata-foundation/spl-token-staking" "^2.2.1-alpha.8+2df342d"
-    "@strata-foundation/spl-utils" "^2.2.1-alpha.8+2df342d"
+    "@strata-foundation/spl-token-bonding" "^3.1.0"
+    "@strata-foundation/spl-token-staking" "^3.1.0"
+    "@strata-foundation/spl-utils" "^3.1.0"
     bn.js "^5.2.0"
     copyfiles "^2.4.1"
 
-"@strata-foundation/spl-token-staking@^2.2.1-alpha.8+2df342d":
-  version "2.2.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-staking/-/spl-token-staking-2.2.1-alpha.8.tgz#7cfefecdbfc89ec20ab7dba2c285e2cc1df766a9"
-  integrity sha512-vMnK/Sa7HyZyOES4s7N4xDtNT0GH9SvbUQFvPOJueICYuICUvD7EQIbmi4DM2wwVJzcsN3ZKBROh4gMKvueZWQ==
+"@strata-foundation/spl-token-staking@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-token-staking/-/spl-token-staking-3.1.0.tgz#b50ec9d64e77adcdb2fa6d8fcb1a83bb30dedf87"
+  integrity sha512-weNfb0zHs5gz8/sNfAi8Ouh1kIsmGFsKBQHX3S4eUHy4rXa4mOWvWvoyHt1RP6ZnUjSVYQJjnL/FYlT72Ue0Kg==
   dependencies:
     "@solana/web3.js" "^1.32.0"
-    "@strata-foundation/spl-utils" "^2.2.1-alpha.8+2df342d"
+    "@strata-foundation/spl-utils" "^3.1.0"
     bn.js "^5.2.0"
     semver "^7.3.5"
 
-"@strata-foundation/spl-utils@^2.2.1-alpha.8+2df342d":
-  version "2.2.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-utils/-/spl-utils-2.2.1-alpha.8.tgz#7a84c35c6a343d0e7760823499cb45e25a7e2d87"
-  integrity sha512-oh/ZJprccOJ+Ik/+ScK/aAwAjHSkvkBHcwAFmBJIP0o32M6xix1jnEjT/8/c/DQJhN0MSju8cObXIDhrYwoMBA==
+"@strata-foundation/spl-utils@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/spl-utils/-/spl-utils-3.1.0.tgz#13761589cc573f0563147d307bba53f0e610ea66"
+  integrity sha512-1932hP1GqLW+29mIASFOgbmS1D2YI7F17rfeVNU0LUO5JcZ1jXmgfY5ozPPFwILwYzO+zOJIPDEzLUM5H0twPg==
   dependencies:
     "@metaplex-foundation/mpl-token-metadata" "^1.1.0"
     "@metaplex/arweave-cost" "1.0.4"
