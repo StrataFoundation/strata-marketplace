@@ -29,7 +29,6 @@ async function buy(tokenBondingSdk: SplTokenBonding, tokenBonding: PublicKey, qu
 
 export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: { tokenBondingKey: PublicKey | undefined, name: string, description: string, image: string }) => {
   const { info: tokenBonding } = useTokenBonding(tokenBondingKey);
-  const { publicKey } = useWallet();
   const targetMint = useMint(tokenBonding?.targetMint);
   const { image: targetImage, metadata: targetMetadata, data: targetData, loading: targetMetaLoading } = useTokenMetadata(tokenBonding?.targetMint);
   const { metadata: baseMetadata } = useTokenMetadata(tokenBonding?.baseMint);
