@@ -69,7 +69,7 @@ export const MarketDisplay: NextPage = ({ name, image, description }: InferGetSe
     </Head>
     <Box w="full" h="full" overflow="auto" paddingTop={{ sm: "18px" }}>
       <Center flexGrow={1}>
-        <Center bg="white" shadow="xl" rounded="lg" w="500px">
+        <Center bg="white" shadow="xl" rounded="lg" maxW="600px">
           <MarketplaceItem 
             name={name}
             description={description}
