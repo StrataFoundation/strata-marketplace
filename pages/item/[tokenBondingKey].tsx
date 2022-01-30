@@ -59,6 +59,13 @@ export const MarketDisplay: NextPage = ({ name, image, description }: InferGetSe
       <meta property="og:image" content={image} />
       <meta property="og:description" content={description} />
       <link rel="icon" href="/favicon.ico" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content="marketplace.strataprotocol.com" />
+      <meta property="twitter:url" content={`https://marketplace.strataprotocol.com/item/${tokenBondingKeyRaw}/`} />
+      <meta name="twitter:title" content={name} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
     </Head>
     <Box w="full" h="full" overflow="auto" paddingTop={{ sm: "18px" }}>
       <Center flexGrow={1}>
