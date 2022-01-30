@@ -29,6 +29,7 @@ async function buy(tokenBondingSdk: SplTokenBonding, tokenBonding: PublicKey, qu
 
 export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: { tokenBondingKey: PublicKey | undefined, name: string, description: string, image: string }) => {
   const { info: tokenBonding } = useTokenBonding(tokenBondingKey);
+  const { connected } = useWallet();
   const targetMint = useMint(tokenBonding?.targetMint);
   const { image: targetImage, metadata: targetMetadata, data: targetData, loading: targetMetaLoading } = useTokenMetadata(tokenBonding?.targetMint);
   const { metadata: baseMetadata } = useTokenMetadata(tokenBonding?.baseMint);
@@ -77,7 +78,7 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
       </Alert>
     </Alert>}
     <Button
-      isDisabled={notEnoughFunds || passedMintCap || !qtyNumber || qtyNumber <= 0}
+      isDisabled={!connected || notEnoughFunds || passedMintCap || !qtyNumber || qtyNumber <= 0}
       isLoading={loading}
       value={qty}
       loadingText={awaitingApproval ? "Awaiting Approval" : "Loading"}
@@ -87,6 +88,7 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
       colorScheme="blue"
     >
       {
+        !connected ? "Connect a Wallet" :
         notEnoughFunds ? `Not Enough ${baseMetadata?.data.symbol || "funds"}` :
           passedMintCap ? "Sold Out" : "Buy"}
     </Button>

@@ -1543,10 +1543,10 @@
     superstruct "^0.14.2"
     tweetnacl "^1.0.0"
 
-"@strata-foundation/react@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@strata-foundation/react/-/react-3.1.0.tgz#03fa750f10f1edf72b3567133f47c8eefe544d82"
-  integrity sha512-Hwy2whf9DGfW/t8099h3ICM7F49w8XXpQVTU+13CA485IGvkeJ+4fe58cfHpf2RqqYq3yuklQqtuf5wMMQbmHQ==
+"@strata-foundation/react@3.1.1-alpha.2+2274c6b":
+  version "3.1.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/react/-/react-3.1.1-alpha.2.tgz#0a9ea84d9e559e85c9172b6c484dacb882ca84a6"
+  integrity sha512-ssJmoYuDZUbjuySlTjQYJptl23B92HnTzYsNyGFRdpGwgUWeseqTe2OqQVtIpKzjtzpHwoJSyhI+5X6oYC/z+g==
   dependencies:
     "@chakra-ui/react" "^1.7.2"
     "@emotion/react" "^11.6.0"
