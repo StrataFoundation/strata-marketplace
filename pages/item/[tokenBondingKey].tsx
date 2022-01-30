@@ -52,6 +52,7 @@ export const MarketDisplay: NextPage = ({ name, image, description }: InferGetSe
   return <Box h="100vh">
     <Head>
       <title>{name}</title>
+      <meta name="twitter:card" content="summary_large_image" />
       <meta property="og:type" content="website" />
       <meta name="description" content={description} />
       <meta property="og:title" content={name} />
