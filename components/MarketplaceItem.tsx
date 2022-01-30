@@ -1,6 +1,7 @@
 import { Alert, Button, Heading, Image, Input, Text, VStack } from "@chakra-ui/react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
-import { Notification, useBondingPricing, useMint, useProvider, useStrataSdks, useTokenBonding, useTokenMetadata } from "@strata-foundation/react";
+import { Notification, useAssociatedAccount, useBondingPricing, useMint, useOwnedAmount, useProvider, useStrataSdks, useTokenBonding, useTokenMetadata } from "@strata-foundation/react";
 import { SplTokenBonding } from "@strata-foundation/spl-token-bonding";
 import BN from "bn.js";
 import React, { useState } from "react";
@@ -28,6 +29,7 @@ async function buy(tokenBondingSdk: SplTokenBonding, tokenBonding: PublicKey, qu
 
 export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: { tokenBondingKey: PublicKey | undefined, name: string, description: string, image: string }) => {
   const { info: tokenBonding } = useTokenBonding(tokenBondingKey);
+  const { publicKey } = useWallet();
   const targetMint = useMint(tokenBonding?.targetMint);
   const { image: targetImage, metadata: targetMetadata, data: targetData, loading: targetMetaLoading } = useTokenMetadata(tokenBonding?.targetMint);
   const { metadata: baseMetadata } = useTokenMetadata(tokenBonding?.baseMint);
@@ -39,10 +41,15 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
   const qtyNumber = Number(qty);
   const mintCapNumber = (tokenBonding?.mintCap as BN | undefined)?.toNumber();
   const targetSupplyNumber = targetMint?.supply.toNumber()
+  const balance = useOwnedAmount(tokenBonding?.baseMint);
+  const price = pricing?.buyTargetAmount(Number(qty) || 1);
+  const notEnoughFunds = (balance || 0) < (price || 0);
   const passedMintCap = (targetSupplyNumber || 0) >= (mintCapNumber || 0);
   name = targetMetadata?.data.name || name;
   image = targetImage || image;
   description = targetData?.description || description;
+
+  error && console.error(error);
 
   return <VStack
     p={4}
@@ -59,7 +66,7 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
         min={1}
       />
       <Text size="sm">
-        <b>Price:</b> {pricing?.buyTargetAmount(Number(qty) || 1)} {baseMetadata?.data.symbol}
+        <b>Price:</b> {price} {baseMetadata?.data.symbol}
       </Text>
       <Text size="sm">
         <b>Available:</b> {(mintCapNumber || 0) - (targetSupplyNumber || 0)} / {mintCapNumber || 0}
@@ -71,7 +78,7 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
       </Alert>
     </Alert>}
     <Button
-      isDisabled={passedMintCap || !qtyNumber || qtyNumber <= 0}
+      isDisabled={notEnoughFunds || passedMintCap || !qtyNumber || qtyNumber <= 0}
       isLoading={loading}
       value={qty}
       loadingText={awaitingApproval ? "Awaiting Approval" : "Loading"}
@@ -80,7 +87,9 @@ export const MarketplaceItem = ({ tokenBondingKey, name, description, image }: {
       size="lg"
       colorScheme="blue"
     >
-      {passedMintCap ? "Sold Out" : "Buy"}
+      {
+        notEnoughFunds ? `Not Enough ${baseMetadata?.data.symbol || "funds"}` :
+          passedMintCap ? "Sold Out" : "Buy"}
     </Button>
   </VStack>
 }
